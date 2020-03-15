@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 function startApp() {
+    inquirer.prompt(questions, managerQuestions, engineerQuestions, internQuestions);
     const questions = [
         {
             type: "confirm",
@@ -103,8 +104,8 @@ function startApp() {
         }
     ];
 };
-startApp();
 
+startApp();
 
 const employee = [];
 
