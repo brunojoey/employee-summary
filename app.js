@@ -7,8 +7,76 @@ const fs = require("fs");
 ​
 const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-​
 const render = require("./lib/htmlRenderer");
+
+const engineerQuestions = [
+    {
+        type: "input",
+        message: "Please enter your name.",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "Please enter your work ID.",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "Please enter your work email.",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "Please enter your work GitHub.",
+        name: "github"
+    }
+];
+
+const managerQuestions = [
+    {
+        type: "input",
+        message: "Please enter your name.",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "Please enter your work ID.",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "Please enter your work email.",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "Please enter your manager office number.",
+        name: "office"
+    }
+];
+
+const internQuestions = [
+    {
+        type: "input",
+        message: "Please enter your name.",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "Please enter your work ID.",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "Please enter your work email.",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "Please enter the school you are attending.",
+        name: "school"
+    }
+]
 ​
 ​
 // Write code to use inquirer to gather information about the development team members,
