@@ -9,14 +9,12 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
-function startApp() {
-    inquirer.prompt(questions, managerQuestions, engineerQuestions, internQuestions);
+async function startApp() {
     const questions = [
         {
             type: "confirm",
             message: "Would you like to create a new employee?",
             name: "newEmployee",
-            default: true
         },
         {
             type: "list",
@@ -30,11 +28,11 @@ function startApp() {
         },
         {
             type: "confirm",
-            message: "Would you liek to create another employee?",
+            message: "Would you like to create another employee?",
             name: "anotherEmployee",
-            default: false
         }
     ];
+
     const engineerQuestions = [
         {
             type: "input",
@@ -103,11 +101,60 @@ function startApp() {
             name: "school"
         }
     ];
+
+    const employees = [];
+    var exit = true;
+    do {
+        const begin = await inquirer.prompt(questions[0]);
+        const { newEmployee } = begin;
+        if (newEmployee === true) {
+            const type = await inquirer.prompt(questions[1]);
+            const { employeeType } = type;
+            if (employeeType === "Intern") {
+                const internObject = await inquirer.prompt(internQuestions);
+                const { name, id, email, school } = internObject;
+                const newIntern = new Intern(name, id, email, school);
+                employees.push(newIntern);
+                const runAgain = await inquirer.prompt(questions[2]);
+                const { anotherEmployee } = runAgain
+                exit = anotherEmployee;
+
+            }
+            else if (employeeType === "Engineer") {
+                const engineerObject = await inquirer.prompt(engineerQuestions);
+                const { name, id, email, github } = engineerObject;
+                const newEngineer = new Engineer(name, id, email, github);
+                employees.push(newEngineer);
+                const runAgain = await inquirer.prompt(questions[2]);
+                const { anotherEmployee } = runAgain
+                exit = anotherEmployee;
+            }
+            else if (employeeType === "Manager") {
+                const managerObject = await inquirer.prompt(managerQuestions);
+                const { name, id, email, office } = managerObject;
+                const newManager = new Manager(name, id, email, office);
+                employees.push(newManager);
+                const runAgain = await inquirer.prompt(questions[2]);
+                const { anotherEmployee } = runAgain
+                exit = anotherEmployee;
+            }
+        } else if (newEmployee === false) {
+            console.log("Finished creating employees..." + "You have " + employees.length + " employees.");
+            exit = false;
+        };
+    }
+    while (exit === true);
+    const teamHTML = await render(employees);
+    fs.writeFile(outputPath, teamHTML, "utf8", function (err) {
+        if (err) {
+            return console.log("Something went wrong.");
+        }
+        console.log("Success!");
+    });
+
 };
 
 startApp();
-
-const employee = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
