@@ -21,9 +21,9 @@ async function startApp() {
             message: "Which employee would we like to create?",
             name: "employeeType",
             choices: [
-                { name: "Intern", checked: false },
+                { name: "Manager", checked: false },
                 { name: "Engineer", checked: false },
-                { name: "Manager", checked: false }
+                { name: "Intern", checked: false }
             ]
         },
         {
@@ -110,15 +110,14 @@ async function startApp() {
         if (newEmployee === true) {
             const type = await inquirer.prompt(questions[1]);
             const { employeeType } = type;
-            if (employeeType === "Intern") {
-                const internObject = await inquirer.prompt(internQuestions);
-                const { name, id, email, school } = internObject;
-                const newIntern = new Intern(name, id, email, school);
-                employees.push(newIntern);
+            if (employeeType === "Manager") {
+                const managerObject = await inquirer.prompt(managerQuestions);
+                const { name, id, email, office } = managerObject;
+                const newManager = new Manager(name, id, email, office);
+                employees.push(newManager);
                 const runAgain = await inquirer.prompt(questions[2]);
                 const { anotherEmployee } = runAgain
                 exit = anotherEmployee;
-
             }
             else if (employeeType === "Engineer") {
                 const engineerObject = await inquirer.prompt(engineerQuestions);
@@ -129,11 +128,11 @@ async function startApp() {
                 const { anotherEmployee } = runAgain
                 exit = anotherEmployee;
             }
-            else if (employeeType === "Manager") {
-                const managerObject = await inquirer.prompt(managerQuestions);
-                const { name, id, email, office } = managerObject;
-                const newManager = new Manager(name, id, email, office);
-                employees.push(newManager);
+            else if (employeeType === "Intern") {
+                const internObject = await inquirer.prompt(internQuestions);
+                const { name, id, email, school } = internObject;
+                const newIntern = new Intern(name, id, email, school);
+                employees.push(newIntern);
                 const runAgain = await inquirer.prompt(questions[2]);
                 const { anotherEmployee } = runAgain
                 exit = anotherEmployee;
