@@ -1,13 +1,13 @@
 # Employee Summary
 
 ## Table of Contents
-[Description](#description)
-[Author(s)](##author(s))
-[Installation](##installation)
-[Usage](##usage)
-[License](##license)
-[Contributing](##contributing)
-[Application In Use](##application-in-use)
+* [Description](#description)
+* [Author(s)](#author(s))
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Application In Use](#application-in-use)
 
 ## Description
 This employee application helps you create your employee database into a HTML document with the help of various prompts that include an Intern, an Engineer, and a Manager. Each different type of worker has a question specific to them. After answering these various question prompts the application will generate the HTML document and put each worker you created into their own separate card. 
