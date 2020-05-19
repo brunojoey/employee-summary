@@ -138,7 +138,6 @@ async function startApp() {
                 exit = anotherEmployee;
             }
         } else if (newEmployee === false) {
-            console.log("Finished creating employees..." + "You have " + employees.length + " employees.");
             exit = false;
         };
     }
@@ -148,7 +147,6 @@ async function startApp() {
         if (err) {
             return console.log("Something went wrong.");
         }
-        console.log("Success!");
     });
 
 };
